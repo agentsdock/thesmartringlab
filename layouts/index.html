@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <section class="hero">
+    <h1>Smart rings, explained like a human.</h1>
+    <p class="lead">
+      Reviews, comparisons, sizing guides, and troubleshooting. Focus: RingConn, Oura, and other smart rings.
+    </p>
+    <div class="cta">
+      <a class="btn" href="/best-smart-rings/">See the best smart rings</a>
+      <a class="btn btn-ghost" href="/ringconn/">RingConn hub</a>
+    </div>
+  </section>
+
+  <section class="grid">
+    <h2>Latest posts</h2>
+    {{ $posts := where (where .Site.RegularPages "Section" "posts") "Params.noindex" "ne" true }}
+    <div class="cards">
+      {{ range first 9 $posts }}
+        <article class="card">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+          <div class="meta">{{ .Date.Format "2006-01-02" }}</div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

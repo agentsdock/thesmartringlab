@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <header class="page-head">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+  </header>
+
+  {{ .Content }}
+
+  {{ $posts := where (where .Site.RegularPages "Section" "posts") "Params.noindex" "ne" true }}
+  {{ if gt (len $posts) 0 }}
+    <hr />
+    <h2>Public articles ({{ len $posts }})</h2>
+    <div class="cards">
+      {{ range $posts }}
+        <article class="card">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+          <div class="meta">{{ .Date.Format "2006-01-02" }}</div>
+        </article>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p>No articles found.</p>
+  {{ end }}
+{{ end }}

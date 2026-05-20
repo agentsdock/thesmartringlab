@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <article class="post">
+    <header class="post-head">
+      <h1>{{ .Title }}</h1>
+      <div class="meta">{{ .Date.Format "2006-01-02" }} · {{ .ReadingTime }} min read</div>
+    </header>
+    <div class="content">
+      {{ .Content }}
+    </div>
+    {{ with .Params.related }}
+      <hr />
+      <h2>Related</h2>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .url }}">{{ .title }}</a></li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </article>
+{{ end }}

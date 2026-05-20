@@ -1,0 +1,47 @@
+baseURL = "https://thesmartringlab.com/"
+languageCode = "en-us"
+title = "The Smart Ring Lab"
+enableRobotsTXT = false
+disableKinds = ["taxonomy"]
+
+[pagination]
+  pagerSize = 12
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "Smart ring reviews, comparisons, sizing guides, and troubleshooting. Focus: RingConn, Oura, Ultrahuman."
+  mainSections = ["posts"]
+
+[permalinks]
+  posts = "/:slug/"
+
+[menu]
+  [[menu.main]]
+    name = "Best Smart Rings"
+    url = "/best-smart-rings/"
+    weight = 1
+  [[menu.main]]
+    name = "RingConn"
+    url = "/ringconn/"
+    weight = 2
+  [[menu.main]]
+    name = "RingConn vs Oura"
+    url = "/ringconn-vs-oura/"
+    weight = 3
+  [[menu.main]]
+    name = "All Articles"
+    url = "/posts/"
+    weight = 4
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 5

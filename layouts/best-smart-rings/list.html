@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <header class="page-head">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  <hr />
+
+  <h2>Related guides</h2>
+  <div class="cards">
+    {{ $posts := where (where .Site.RegularPages "Section" "posts") "Params.noindex" "ne" true }}
+    {{ range $posts }}
+      {{ if or (hasPrefix .Title "Best smart ring") (hasPrefix .Title "Best smart rings") }}
+        <article class="card">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+        </article>
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

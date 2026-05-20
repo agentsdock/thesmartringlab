@@ -1,0 +1,15 @@
+{{- $url := .Destination -}}
+{{- $isExternal := or (hasPrefix $url "http://") (hasPrefix $url "https://") -}}
+{{- $isAmazon := or (in $url "amazon.com") (in $url "amzn.to") -}}
+{{- $title := .Title | default "" -}}
+{{- $text := .Text -}}
+
+{{- if $isExternal -}}
+  {{- if $isAmazon -}}
+    <a href="{{ $url }}" rel="sponsored nofollow noopener" target="_blank"{{ with $title }} title="{{ . }}"{{ end }}>{{ $text }}</a>
+  {{- else -}}
+    <a href="{{ $url }}" rel="nofollow noopener" target="_blank"{{ with $title }} title="{{ . }}"{{ end }}>{{ $text }}</a>
+  {{- end -}}
+{{- else -}}
+  <a href="{{ $url }}"{{ with $title }} title="{{ . }}"{{ end }}>{{ $text }}</a>
+{{- end -}}

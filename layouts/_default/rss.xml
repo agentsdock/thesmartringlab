@@ -1,0 +1,29 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- $pages := .RegularPages -}}
+{{- if .IsHome -}}
+  {{- $pages = .Site.RegularPages -}}
+{{- end -}}
+{{- $pages = where $pages "Params.noindex" "ne" true -}}
+{{- $feed := "" -}}
+{{- with .OutputFormats.Get "rss" -}}
+  {{- $feed = .Permalink -}}
+{{- end }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ if .IsHome }}{{ .Site.Title | html }}{{ else }}{{ with .Title }}{{ . | html }} on {{ end }}{{ .Site.Title | html }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ with .Description }}{{ . | html }}{{ else }}{{ .Site.Params.description | html }}{{ end }}</description>
+    <generator>Hugo</generator>
+    <language>{{ .Site.Language.LanguageCode }}</language>
+    {{ with $feed }}<atom:link href="{{ . }}" rel="self" type="application/rss+xml" />{{ end }}
+    {{ range first 20 $pages }}
+    <item>
+      <title>{{ .Title | html }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ .Summary | html }}</description>
+    </item>
+    {{ end }}
+  </channel>
+</rss>
