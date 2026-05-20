@@ -167,7 +167,7 @@ description: "Compare RingConn Gen 2/Gen 3 vs Oura Ring 4 total cost over time. 
       <select id="ringconn-model" onchange="updatePrice()">
         <option value="gen3-promo">RingConn Gen 3 (pre-order $314)</option>
         <option value="gen3">RingConn Gen 3 (regular $349)</option>
-        <option value="gen2">RingConn Gen 2 ($299)</option>
+        <option value="gen2" selected>RingConn Gen 2 ($299)</option>
         <option value="gen2-air">RingConn Gen 2 Air ($199)</option>
       </select>
       <div class="promo-note" id="promo-note">Pre-order discount ends May 28, 2026</div>
