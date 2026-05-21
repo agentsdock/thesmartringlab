@@ -1,0 +1,29 @@
+{{ $url := .RelPermalink }}
+{{ $parts := split (trim $url "/") "/" }}
+{{ if gt (len $parts) 0 }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{ $index := 0 }}
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ .Site.BaseURL }}"
+    }
+    {{ range $parts }}
+    {{ $index = add $index 1 }}
+    {{ $path := printf "/%s/" (delimit (first $index $parts) "/") }}
+    ,{
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "name": "{{ humanize . | title }}",
+      "item": "{{ $.Site.BaseURL }}{{ trim $path "/" }}"
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}

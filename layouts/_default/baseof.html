@@ -21,6 +21,21 @@
       "description": "{{ .Site.Params.description }}"
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "url": "{{ .Site.BaseURL }}",
+      "logo": "{{ .Site.BaseURL }}logo.png",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hello@thesmartringlab.com",
+        "contactType": "customer service"
+      }
+    }
+    </script>
     {{ else if and .IsPage (not .Params.noindex) }}
     {{ $isPolicyPage := or (eq .Section "about") (eq .Section "privacy") (eq .Section "contact") (eq .Section "affiliate-disclosure") (eq .Section "editorial-policy") }}
     {{ if $isPolicyPage }}
@@ -61,6 +76,9 @@
     </script>
     {{ if .Params.faqs }}
     {{ partial "faq-schema.html" . }}
+    {{ end }}
+    {{ if not .IsHome }}
+    {{ partial "breadcrumb-schema.html" . }}
     {{ end }}
     {{ end }}
     {{ end }}
