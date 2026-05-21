@@ -28,7 +28,7 @@
       <hr />
       <h2>Related articles</h2>
       <div class="cards">
-        {{ range $posts }}
+        {{ range first 9 $posts }}
           {{ $show := false }}
           {{ if or
             (and (eq $sectionTitle "Best Smart Rings (2026)") (or (in .Title "Best smart ring") (in .Title "Best smart rings")))
