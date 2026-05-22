@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ with .Params.seoTitle }}{{ . }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
+    <title>{{ if .IsHome }}Smart Ring Reviews, Comparisons and Buying Guides | {{ .Site.Title }}{{ else }}{{ with .Params.seoTitle }}{{ . }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}{{ end }}{{ end }}</title>
     <meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
     <link rel="canonical" href="{{ .Permalink }}" />
     {{ if .Params.noindex }}<meta name="robots" content="noindex,nofollow" />{{ end }}
